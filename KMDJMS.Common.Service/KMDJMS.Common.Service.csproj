@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KMDJMS.Common.Basic\KMDJMS.Common.Basic.csproj" />
+    <ProjectReference Include="..\KMDJMS.Common.Model\KMDJMS.Common.Model.csproj" />
+    <ProjectReference Include="..\KMDJMS.Common.Repository\KMDJMS.Common.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
