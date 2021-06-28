@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using KMDJMS.Common.Basic.Enum;
 
 namespace KMDJMS.Common.Model.User
 {
@@ -27,6 +28,9 @@ namespace KMDJMS.Common.Model.User
         /// </summary>
         public string SparePhone { get; set; }
 
-        public UserRoleEnum 
+        /// <summary>
+        /// 用户角色
+        /// </summary>
+        public UserRoleEnum UserRole { get; set; }
     }
 }
