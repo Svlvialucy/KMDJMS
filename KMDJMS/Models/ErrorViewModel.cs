@@ -1,6 +1,6 @@
 using System;
 
-namespace KMDJMS.Models
+namespace KMDJMS.WebAPI.Common.Models
 {
     public class ErrorViewModel
     {

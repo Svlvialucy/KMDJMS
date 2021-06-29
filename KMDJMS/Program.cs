@@ -7,17 +7,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace KMDJMS
+namespace KMDJMS.WebAPI.Common
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var builder = CreateHostBuilder(args);
+            builder.Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureLogging(loggingBuilder =>
+                {
+                    loggingBuilder.AddFilter("System", LogLevel.Information);
+                    loggingBuilder.AddFilter("System", LogLevel.Warning);
+                    loggingBuilder.AddFilter("Microsoft", LogLevel.Information);
+                    loggingBuilder.AddFilter("Microsoft", LogLevel.Warning);
+                    loggingBuilder.ClearProviders();
+                    loggingBuilder.AddLog4Net();
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

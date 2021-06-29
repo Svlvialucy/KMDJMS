@@ -7,15 +7,27 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using KMDJMS.Common.Basic.Common;
+using KMDJMS.Common.Service;
+using KMDJMS.Common.Service.Common;
+using KMDJMS.Common.Service.Common.Log;
+using log4net;
 
-namespace KMDJMS
+namespace KMDJMS.WebAPI.Common
 {
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            builder.AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -23,6 +35,16 @@ namespace KMDJMS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //register configuration accessing
+            GetAppsetting.Connection(Configuration);
+            //Logger
+            //init log4net
+            LogManager.CreateRepository(GetAppsetting.GetValue("LogRepository"));
+            //init log message queue & consume
+            LogHelper.StartLogThread();
+
+            services.AddResources(Assembly.GetAssembly(typeof(IDiService)), Assembly.GetEntryAssembly());
+
             services.AddControllersWithViews();
         }
 
@@ -39,6 +61,7 @@ namespace KMDJMS
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -53,5 +76,9 @@ namespace KMDJMS
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        
     }
+
+    
 }

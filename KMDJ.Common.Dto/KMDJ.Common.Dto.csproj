@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KMDJMS.Common.Basic\KMDJMS.Common.Basic.csproj" />
-    <ProjectReference Include="..\KMDJMS.Common.Service\KMDJMS.Common.Service.csproj" />
   </ItemGroup>
 
 </Project>

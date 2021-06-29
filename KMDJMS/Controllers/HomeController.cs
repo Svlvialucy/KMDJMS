@@ -1,4 +1,4 @@
-﻿using KMDJMS.Models;
+﻿using KMDJMS.WebAPI.Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace KMDJMS.Controllers
+namespace KMDJMS.WebAPI.Common.Controllers
 {
     public class HomeController : Controller
     {
