@@ -17,15 +17,10 @@ namespace KMDJMS.Common.Repository.Common
         /// <returns></returns>
         public static IServiceCollection AddDbContexts(this IServiceCollection services)
         {
-            //services.AddDbContext<BasicDbContext>(
-            //    options => options.UseMySql(
-            //        GetAppsetting.GetValue(DbContextBuilder.BasicDataConnectionStringAppSettingName)));
-            //services.AddDbContext<ScanDbContext>(
-            //    options => options.UseMySql(
-            //        ConfigurationManagerEx.AppSettings[DbContextBuilder.ScanDataConnectionStringAppSettingName]));
-            //services.AddDbContext<BasicRODbContext>(
-            //    options => options.UseMySql(
-            //        ConfigurationManagerEx.AppSettings[DbContextBuilder.BasicDataROConnectionStringAppSettingName]));
+            services.AddDbContext<BasicDbContext>(
+                options => options.UseMySql(
+                    GetAppsetting.GetValue(DbContextBuilder.BasicDataConnectionStringAppSettingName), new MySqlServerVersion(new Version(5, 7))));
+            
 
             return services;
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using KMDJMS.Common.Basic.Enum;
 
-namespace KMDJ.Common.Dto.Common.Log
+namespace KMDJMS.Common.Dto.Common.Log
 {
     public class LoggingModel
     {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using KMDJMS.Common.Repository.Common;
+using KMDJMS.Common.Repository.DbContext;
 using KMDJMS.Common.Service.Common;
 using KMDJMS.Common.Service.Common.Log;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,9 @@ namespace KMDJMS.Common.Service
                     services.AddServicesFromAssembly(assembly);
                 }
             }
+
+            AddRepositories(services);
+
             //Add MemoryCache
             services.AddMemoryCache(options =>
             {
@@ -59,5 +63,16 @@ namespace KMDJMS.Common.Service
             return service;
         }
 
+        public static IServiceCollection AddRepositories(this IServiceCollection service)
+        {
+            var repositories = Assembly.GetAssembly(typeof(IDiRepository)).GetTypes()
+                .Where(type => !type.IsInterface && typeof(IDiRepository).IsAssignableFrom(type)).ToList();
+            foreach (var repository in repositories)
+            {
+                service.AddScoped(repository);
+            }
+            LogHelper.Info($"ServiceCollectionExtensions AddRepositories: {repositories.Count} repositories added.");
+            return service;
+        }
     }
 }
