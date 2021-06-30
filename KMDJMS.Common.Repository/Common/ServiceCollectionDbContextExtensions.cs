@@ -21,7 +21,6 @@ namespace KMDJMS.Common.Repository.Common
                 options => options.UseMySql(
                     GetAppsetting.GetValue(DbContextBuilder.BasicDataConnectionStringAppSettingName), new MySqlServerVersion(new Version(5, 7))));
             
-
             return services;
         }
     }

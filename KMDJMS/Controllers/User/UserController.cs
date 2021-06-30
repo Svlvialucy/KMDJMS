@@ -22,12 +22,12 @@ namespace KMDJMS.WebAPI.Common.Controllers.User
 
         [HttpGet]
         [Route("Api/User/Login")]
-        public IActionResult Login(string email, string password)
+        public IActionResult Login(string phone, string password)
         {
             try
             {
                 var sessionId = HttpContext.Session.Id;
-                BriefUser briefUser = _userService.Login(email, password, sessionId);
+                BriefUser briefUser = _userService.Login(phone, password, sessionId);
 
                 if (briefUser == null)
                 {

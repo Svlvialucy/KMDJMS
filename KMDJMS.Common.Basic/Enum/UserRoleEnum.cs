@@ -10,6 +10,8 @@ namespace KMDJMS.Common.Basic.Enum
 
         Employee = 1,
         
-        //Reseller = 2
+        Reseller = 2,
+
+        OutEmployee = 3
     }
 }
