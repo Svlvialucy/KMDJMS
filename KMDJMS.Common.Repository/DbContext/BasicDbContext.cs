@@ -16,8 +16,9 @@ namespace KMDJMS.Common.Repository.DbContext
 
         public DbSet<Model.User.User> Users { get; set; }
 
+        public DbSet<Model.User.UserToken> UserTokens { get; set; }
+
         public BasicDbContext(DbContextOptions<BasicDbContext> options) : base(options)
-        // Don't use base type, so that dependency injection can choose the correct DbContext from multiple DbContext types.
         {
             Options = options;
         }

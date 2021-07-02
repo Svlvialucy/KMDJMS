@@ -17,4 +17,8 @@
     <PackageReference Include="RazorEngine.NetCore" Version="2.2.4" />-->
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>
