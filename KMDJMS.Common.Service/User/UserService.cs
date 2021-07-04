@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using KMDJMS.Common.Basic.Mapper;
 using KMDJMS.Common.Dto.User;
 using KMDJMS.Common.Repository.User;
@@ -21,6 +22,18 @@ namespace KMDJMS.Common.Service.User
         {
             var user = _userDao.GetUserByPhone(phone, password);
 
+            return MapperToBrief(user);
+        }
+
+        public List<BriefUser> GetList(GetUserListSo request)
+        {
+            var userList = _userDao.GetUserList(request);
+
+            return userList.Select(MapperToBrief).ToList();
+        }
+
+        public BriefUser MapperToBrief(Model.User.User user)
+        {
             return MapperExtensions<Model.User.User, BriefUser>.Map(user);
         }
     }

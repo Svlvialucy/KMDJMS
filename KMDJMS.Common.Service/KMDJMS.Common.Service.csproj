@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Configration\**" />
+    <EmbeddedResource Remove="Configration\**" />
+    <None Remove="Configration\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="3.1.0" />
   </ItemGroup>
 
@@ -13,10 +19,6 @@
     <ProjectReference Include="..\KMDJMS.Common.Basic\KMDJMS.Common.Basic.csproj" />
     <ProjectReference Include="..\KMDJMS.Common.Model\KMDJMS.Common.Model.csproj" />
     <ProjectReference Include="..\KMDJMS.Common.Repository\KMDJMS.Common.Repository.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configration\" />
   </ItemGroup>
 
 </Project>

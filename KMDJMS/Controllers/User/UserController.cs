@@ -66,5 +66,52 @@ namespace KMDJMS.WebAPI.Common.Controllers.User
                 });
             }
         }
+
+        [HttpPost]
+        [Route("Api/User/GetList")]
+        public IActionResult GetList([FromBody]GetUserListSo request)
+        {
+            try
+            {
+                var sessionId = HttpContext.Session.Id;
+                var briefUsers = _userService.GetList(request);
+
+                if (briefUsers == null)
+                {
+                    return Json(new
+                    {
+                        code = -1,
+                        msg = "fail"
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        code = 0,
+                        data = briefUsers
+                    });
+                }
+            }
+            catch (WebApiException ex)
+            {
+                LogHelper.Info(ex);
+
+                return Json(new
+                {
+                    code = -1,
+                    msg = ex.Message
+                });
+            }
+            catch (Exception e)
+            {
+                LogHelper.Error(e);
+                return Json(new
+                {
+                    code = -99,
+                    msg = "System Error"
+                });
+            }
+        }
     }
 }
