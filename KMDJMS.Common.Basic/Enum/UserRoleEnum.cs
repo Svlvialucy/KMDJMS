@@ -12,6 +12,6 @@ namespace KMDJMS.Common.Basic.Enum
         
         Reseller = 2,
 
-        OutEmployee = 3
+        OutEmployee = 4
     }
 }
