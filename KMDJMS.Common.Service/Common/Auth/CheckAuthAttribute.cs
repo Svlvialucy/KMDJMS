@@ -84,18 +84,15 @@ namespace KMDJMS.Common.Service.Common.Auth
         public bool CheckAuthorityByToken(ActionExecutingContext context, Model.User.User user)
         {
             var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
-            var url = $"api/{context.ActionDescriptor.RouteValues["controller"]}/{context.ActionDescriptor.RouteValues["action"]}";
+            //var url = $"api/{context.ActionDescriptor.RouteValues["controller"]}/{context.ActionDescriptor.RouteValues["action"]}";
 
-            //if (controllerActionDescriptor?.MethodInfo.GetCustomAttributes(typeof(CheckAuthAttribute), true) != null)
-            //{
-
-            //}
-
-            if (((int)user.UserRole & UserRoleAuth) != 1)
+            if (controllerActionDescriptor?.MethodInfo.GetCustomAttributes(typeof(CheckAuthAttribute), true) != null)
             {
-                return false;
+                if (((int)user.UserRole & UserRoleAuth) != 1)
+                {
+                    return false;
+                }
             }
-
             return true;
         }
     }

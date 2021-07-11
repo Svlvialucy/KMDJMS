@@ -19,18 +19,20 @@ namespace KMDJMS.Common.Model.User
         public string UserName { get; set; }
 
         /// <summary>
-        /// 常用电话
+        /// 电话 唯一
         /// </summary>
-        public string CommonPhone { get; set; }
+        public string Phone { get; set; }
 
-        /// <summary>
-        /// 备用电话
-        /// </summary>
-        public string SparePhone { get; set; }
-
+        public string Password { get; set; }
         /// <summary>
         /// 用户角色
         /// </summary>
         public UserRoleEnum UserRole { get; set; }
+
+        public string WeChatCode { get; set; }
+
+        public UserStatusEnum UserStatus { get; set; }
+
+        public bool IsVerified { get; set; }
     }
 }

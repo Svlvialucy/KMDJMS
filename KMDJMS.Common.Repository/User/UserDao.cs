@@ -17,9 +17,9 @@ namespace KMDJMS.Common.Repository.User
             _basicDbContext = basicDbContext;
         }
 
-        public Model.User.User GetUserByPhone(string phone, string password)
+        public Model.User.User GetUserByPhone(string phone)
         {
-            var user = _basicDbContext.Users.FirstOrDefault(t => t.CommonPhone == phone);
+            var user = _basicDbContext.Users.FirstOrDefault(t => t.Phone == phone);
 
             return user;
         }
@@ -40,7 +40,7 @@ namespace KMDJMS.Common.Repository.User
 
             if (!string.IsNullOrEmpty(request.Phone))
             {
-                query = query.Where(t => t.CommonPhone.Contains(request.Phone) || t.SparePhone.Contains(request.Phone));
+                query = query.Where(t => t.Phone.Contains(request.Phone));
             }
 
             var list = query.ToList();

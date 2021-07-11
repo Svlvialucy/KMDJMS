@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KMDJMS.Common.Basic.Exception;
 using KMDJMS.Common.Dto.User;
+using KMDJMS.Common.Service.Common.Auth;
 using KMDJMS.Common.Service.Common.Log;
 using KMDJMS.Common.Service.User;
 using Microsoft.AspNetCore.Identity;
@@ -67,9 +68,91 @@ namespace KMDJMS.WebAPI.Common.Controllers.User
             }
         }
 
+        [HttpGet]
+        [Route("Api/User/Logout")]
+        public IActionResult Logout(string token)
+        {
+            try
+            {
+                _userService.Logout(token);
+
+                return Json(new
+                {
+                    code = 0,
+                    msg = "success"
+                });
+            }
+            catch (WebApiException ex)
+            {
+                LogHelper.Info(ex);
+
+                return Json(new
+                {
+                    code = -1,
+                    msg = ex.Message
+                });
+            }
+            catch (Exception e)
+            {
+                LogHelper.Error(e);
+                return Json(new
+                {
+                    code = -99,
+                    msg = "System Error"
+                });
+            }
+        }
+
         [HttpPost]
         [Route("Api/User/GetList")]
         public IActionResult GetList([FromBody]GetUserListSo request)
+        {
+            try
+            {
+                var sessionId = HttpContext.Session.Id;
+                var briefUsers = _userService.GetList(request);
+
+                if (briefUsers == null)
+                {
+                    return Json(new
+                    {
+                        code = -1,
+                        msg = "fail"
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        code = 0,
+                        data = briefUsers
+                    });
+                }
+            }
+            catch (WebApiException ex)
+            {
+                LogHelper.Info(ex);
+
+                return Json(new
+                {
+                    code = -1,
+                    msg = ex.Message
+                });
+            }
+            catch (Exception e)
+            {
+                LogHelper.Error(e);
+                return Json(new
+                {
+                    code = -99,
+                    msg = "System Error"
+                });
+            }
+        }
+
+        [HttpPost]
+        [Route("Api/User/AddUser")]
+        public IActionResult AddUser([FromBody] GetUserListSo request)
         {
             try
             {
